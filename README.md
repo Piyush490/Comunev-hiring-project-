@@ -1,3 +1,18 @@
+# Task
+Create a single working sign-up page in Angular, having the following fields-
+
+First Name
+
+Last Name
+
+Username
+
+Password
+
+DOB
+
+Country
+
 # Sample
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
