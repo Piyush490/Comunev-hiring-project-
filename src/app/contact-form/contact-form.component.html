@@ -1,0 +1,137 @@
+<html>
+<body>
+
+
+    <div class="container card">
+    <h5 class="card-header info-color white-text text-center py-4"><strong>Registration</strong></h5>
+    <div class="card-body px-lg-5 pt-0">
+        <form (ngSubmit)="onSubmit()" class="text-center" style="color: #757575;" #Form="ngForm">
+            
+
+            <div class="form-row">
+
+                 <!-- Firstname -->
+            <div class="col">
+            <div class="md-form">
+                <label for="firstName">First Name</label>
+                <input type="text"
+                required
+                ngModel                          
+                pattern="[a-zA-Z]*"
+                name="firstName" 
+                #firstName="ngModel"          
+                (change)="log(firstName)" 
+                id="firstName" 
+                [class.is-valid]="firstName.valid" 
+                class=" formStyle form-control" />   <!-- #firstName is template variable or an instance ngModel -->
+                <small class="form-text text-muted mb-4" *ngIf="firstName.invalid && !firstName.pristine">
+                    <div [hidden]="!firstName.errors.required">firstName is required</div>
+                    <div [hidden]="!firstName.errors.pattern">firstname should contain alphabets only</div>
+                </small>
+            </div>
+            </div>
+
+
+            <!--lastname-->
+            <div class="col">
+            <div class="form-group md-form">
+                <label for="lastName">Last Name</label>
+                <input type="text"
+                required
+                ngModel
+                name="lastName"
+                pattern="[a-zA-Z]*"
+                #lastName="ngModel"         
+                (change)="log(lastName)"
+                id="lastName" [class.is-valid]="lastName.valid" 
+                class=" formStyle form-control" />
+                <small class="form-text text-muted mb-4" *ngIf="lastName.invalid && !lastName.pristine">
+                    <div [hidden]="!lastName.errors.required">lastName is required</div>
+                    <div [hidden]="!lastName.errors.pattern">lastname should only contain alphabets</div>
+                </small>
+            </div>
+        </div>
+    </div>
+
+            <!--username-->
+        <div class=" md-form mt-0">
+            <label for="username">Create your username</label>
+            <input type="email" 
+            required 
+            ngModel 
+            name="username"
+            #username="ngModel"
+            (change)="log(lastName)"
+            id="username"
+            pattern="^[a-z0-9_-]{8,15}$"   
+             [class.is-valid]="username.valid"
+             class="formStyle form-control" 
+             />
+            <small *ngIf="username.invalid && !username.pristine" class="form-text text-muted mb-4">
+    	        <div [hidden]="!username.errors.required">username is required</div>
+    	        <div [hidden]="!username.errors.pattern">invalid username</div>
+            </small>
+            </div>
+
+        <!--password-->
+        <div class="form-group md-form">
+            <label for="password">Password</label>
+            <input type="password"
+            required
+            ngModel
+            pattern='(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'
+            #password="ngModel"
+            id="password"
+            aria-describedby="materialRegisterFormPasswordHelpBlock"
+            [class.is-valid]="password.valid"
+            name="password"
+            class="form-control formStyle">
+            <small  class="form-text text-muted mb-4" *ngIf="password.invalid && !password.pristine">
+                <div *ngIf="password.errors.required">password is required</div>
+                <div *ngIf="password.errors.pattern">Password must contain atleast one letter,one uppercase alphabet and one special symbol. Minimum length should be 8 characters</div>
+              </small>
+        </div>
+
+
+
+        <!-- date of birth-->
+        <div class="md-form md-outline input-with-post-icon datepicker">
+            <label for="dob">Date of Birth</label>
+            <input
+            type="date"
+            required
+            id="dob"
+            ngModel
+            #dob="ngModel"
+            name="dob"
+            [class.is-valid]="dob.valid"
+            (change)="log(dob)"
+            class="form-control"/>
+            <small class="form-text text-muted mb-4" *ngIf="dob.invalid && !dob.pristine">
+                <div *ngIf="dob.errors.required">Choose a date</div>
+                <div *ngIf="dob.errors.pattern">Invalid Date</div>
+            </small>
+        </div>
+
+        
+        <!--country-->
+        <div class="mdb-select md-form">
+            <select 
+                required 
+                (change)="log(country)" 
+                ngModel  
+                name="country" 
+                id="country"
+                #country="ngModel" 
+                class="form-control">
+                <option value="" disabled selected>Choose Country</option>
+                <option  *ngFor="let countryy of countries">{{countryy}}</option>
+            </select>
+                <small class="form-text text-muted mb-4" [hidden]="country.valid||country.pristine"> Choose a country!</small>
+        </div>
+        <button type="Submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" [disabled]="!Form.form.valid">Register</button>
+    </form>
+    </div>
+  </div>
+</body>
+</html>
